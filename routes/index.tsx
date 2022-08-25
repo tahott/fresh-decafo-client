@@ -2,16 +2,12 @@
 /** @jsxFrag Fragment */
 
 import { h, Fragment } from 'preact';
-import { Head } from '$fresh/runtime.ts';
 import { tw } from '@twind';
 import NavigationBar from '../components/Navbar.tsx';
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Fresh decafo</title>
-      </Head>
       <NavigationBar active='/' />
       <div class={tw`p-4 mx-auto max-w-screen-lg`}>
         <img

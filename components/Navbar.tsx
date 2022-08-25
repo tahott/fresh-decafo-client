@@ -10,10 +10,6 @@ interface NavbarProps {
 export default function Navbar({ active }: NavbarProps) {
   const items = [
     {
-      name: 'Home',
-      href: '/',
-    },
-    {
       name: 'Career',
       href: '/career',
     },
@@ -38,7 +34,7 @@ export default function Navbar({ active }: NavbarProps) {
               <a
                 href={item.href}
                 class={tw`text-gray-800 hover:underline ${
-                  active == item.href ? 'font-bold' : ''
+                  active === item.href ? 'font-bold' : ''
                 }`}
               >
                 {item.name}
