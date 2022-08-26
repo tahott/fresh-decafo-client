@@ -2,25 +2,34 @@
 /** @jsxFrag Fragment */
 
 import { h, Fragment } from 'preact';
-import { HandlerContext, Handlers } from '$fresh/server.ts';
+import { HandlerContext, Handlers, PageProps } from '$fresh/server.ts';
+import { getCookies } from '$std/http/cookie.ts';
 import { tw } from '@twind';
 import NavigationBar from '../components/Navbar.tsx';
 
 export const handler: Handlers = {
   async GET(req: Request, ctx: HandlerContext): Promise<Response> {
-    const res = await ctx.render();
+    const hasToken = getCookies(req.headers)['token'];
+    if (hasToken) {
+      return await ctx.render(hasToken);
+    }
+
+    const response = await fetch(`${Deno.env.get('BASE_URL')}/authorization/code?url=http://localhost:8000`)
+    const authUrl = await response.json();
+
+    const res = await ctx.render(authUrl);
     return res;
   }
 }
 
-export default function Profile() {
+export default function Profile({ data }: PageProps<string>) {
   return (
     <>
       <NavigationBar active='profile' />
       <div class={tw`p-4 mx-auto max-w-screen-lg`}>
         <div class={tw`flex justify-center items-center flex-col`}>
           <a
-            href="#"
+            href={data}
             class={tw
               `bg-gray-900 text-gray-100 hover:text-white shadow font-bold text-sm py-3 px-4 rounded flex justify-start items-center cursor-pointer mt-2`}
           >
