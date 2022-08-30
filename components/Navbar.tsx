@@ -4,10 +4,11 @@ import { h } from 'preact';
 import { tw } from '@twind';
 
 interface NavbarProps {
-  active: string
+  active: string;
+  isLogin: boolean;
 }
 
-export default function Navbar({ active }: NavbarProps) {
+export default function Navbar({ active, isLogin }: NavbarProps) {
   const items = [
     {
       name: 'Career',
@@ -17,6 +18,10 @@ export default function Navbar({ active }: NavbarProps) {
       name: 'My Profile',
       href: '/profile'
     },
+    {
+      name: !isLogin ? 'Sign In' : 'Sign Out',
+      href: !isLogin ? '/signIn' : '/api/signOut'
+    }
   ];
 
   return (
