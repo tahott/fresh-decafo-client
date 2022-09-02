@@ -26,7 +26,7 @@ interface CareerProps {
 }
 
 export const handler: Handlers = {
-  async GET(req: Request, ctx: HandlerContext): Promise<Response> {
+  async GET(_req: Request, ctx: HandlerContext): Promise<Response> {
     const hasToken = localStorage.getItem('token');
 
     if (hasToken) {

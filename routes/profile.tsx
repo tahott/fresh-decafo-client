@@ -29,7 +29,7 @@ interface ProfileProps {
 }
 
 export const handler: Handlers = {
-  async GET(req: Request, ctx: HandlerContext): Promise<Response> {
+  async GET(_req: Request, ctx: HandlerContext): Promise<Response> {
     const hasToken = localStorage.getItem('token');
 
     if (hasToken) {
@@ -46,11 +46,7 @@ export const handler: Handlers = {
   }
 }
 
-export default function Profile({ data, url }: PageProps<ProfileProps>) {
-  if (url.searchParams.get('code')) {
-    return <Replace path='/profile' />
-  }
-
+export default function Profile({ data }: PageProps<ProfileProps>) {
   return (
     <>
       <NavigationBar active='/profile' isLogin={data.isLogin} />
