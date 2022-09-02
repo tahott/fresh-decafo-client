@@ -2,6 +2,7 @@
 
 import { h } from 'preact';
 import { tw } from '@twind';
+import NavItem from './NavItem.tsx';
 
 interface NavbarProps {
   active: string;
@@ -34,18 +35,7 @@ export default function Navbar({ active, isLogin }: NavbarProps) {
           <b>DECAFO</b>
         </a>
         <ul class={tw`flex justify-end gap-8 mx-4`}>
-          {items.map((item) => (
-            <li>
-              <a
-                href={item.href}
-                class={tw`text-gray-800 hover:underline ${
-                  active === item.href ? 'font-bold' : ''
-                }`}
-              >
-                {item.name}
-              </a>
-            </li>
-          ))}
+          {items.map((item) => <NavItem active={active} name={item.name} href={item.href} />)}
         </ul>
       </div>
     </nav>
