@@ -8,7 +8,8 @@ import * as $2 from "./routes/career.tsx";
 import * as $3 from "./routes/index.tsx";
 import * as $4 from "./routes/profile.tsx";
 import * as $5 from "./routes/signIn.tsx";
-import * as $$0 from "./islands/replace.tsx";
+import * as $$0 from "./islands/careers.tsx";
+import * as $$1 from "./islands/replace.tsx";
 
 const manifest = {
   routes: {
@@ -20,7 +21,8 @@ const manifest = {
     "./routes/signIn.tsx": $5,
   },
   islands: {
-    "./islands/replace.tsx": $$0,
+    "./islands/careers.tsx": $$0,
+    "./islands/replace.tsx": $$1,
   },
   baseUrl: import.meta.url,
 };
