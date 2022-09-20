@@ -4,8 +4,9 @@
 import { h, Fragment } from 'preact';
 import { tw } from '@twind';
 import { animation, css } from 'twind/css';
-import { useRef, useState } from 'preact/hooks';
+import { useRef, useState, useEffect } from 'preact/hooks';
 import CareerCard from '../components/CareerCard.tsx';
+import { addToCareer, useCareer } from '../utils/data.ts';
 
 declare global {
   interface HTMLDialogElement {
@@ -17,13 +18,15 @@ declare global {
 const slideBottom = animation("0.4s ease normal", {
   from: { transform: "translateY(100%)" },
   to: { transform: "translateY(0)" },
-});
+// deno-lint-ignore no-explicit-any
+}) as any;
 
 const backdrop = css({
   "&::backdrop": {
     background: "rgba(0, 0, 0, 0.5)",
   },
-});
+// deno-lint-ignore no-explicit-any
+}) as any;
 
 interface Career {
   company: string;
@@ -34,19 +37,25 @@ interface Career {
   }
 }
 
-interface CareersProps {
-  careers: Career[];
-}
-
-export default function Careers(props: CareersProps) {
-  const [careers, SetCareer] = useState(props.careers);
+export default function Careers() {
+  const { data, error } = useCareer();
   const ref = useRef<HTMLDialogElement | null>(null);
+
+  useEffect(() => {
+    ref.current!.close()
+  }, []);
 
   const onDialogClick = (e: MouseEvent) => {
     e.preventDefault();
     if ((e.target as HTMLDialogElement).tagName === 'DIALOG') {
       ref.current?.close();
     }
+  }
+
+  if (error) {
+    <div>
+      Error: {error.message}
+    </div>
   }
 
   return (
@@ -59,7 +68,7 @@ export default function Careers(props: CareersProps) {
       </div>
       <div class={tw`rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12`}>
         {
-          careers.map((career) => {
+          data?.map((career) => {
             return <CareerCard company={career.company} job={career.job} date={career.date} />
           })
         }
@@ -98,8 +107,17 @@ function CareerDialog() {
     setOutDate((e.currentTarget as HTMLInputElement).value)
   }
 
-  const handleAddCareer = () => {
-    console.log(company, job, inDate, outDate);
+  const handleAddCareer = (e: h.JSX.TargetedMouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    addToCareer({
+      company,
+      job,
+      date: {
+        in: inDate,
+        out: outDate,
+      }
+    })
   }
 
   return (

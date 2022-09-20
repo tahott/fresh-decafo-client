@@ -50,24 +50,6 @@ export const handler: Handlers = {
         return await ctx.render({
           isLogin: true,
           user: payload.user,
-          careers: [
-            {
-              company: 'Never',
-              job: 'Backend Enginner',
-              date: {
-                in: '2021.02',
-                out: 'until now',
-              },
-            },
-            {
-              company: 'Next',
-              job: 'Backend Enginner',
-              date: {
-                in: '2016.05',
-                out: '2021.01',
-              },
-            },
-          ],
         });
       }
 
@@ -88,7 +70,7 @@ export default function Profile({ data }: PageProps<ProfileProps>) {
             data.user && (
               <div>
                 <div>{data.user.name}</div>
-                <Careers careers={data.careers || []} />
+                <Careers />
               </div>
             )
           }

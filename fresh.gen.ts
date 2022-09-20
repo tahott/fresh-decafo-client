@@ -3,22 +3,24 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $0 from "./routes/_app.tsx";
-import * as $1 from "./routes/api/signOut.tsx";
-import * as $2 from "./routes/career.tsx";
-import * as $3 from "./routes/index.tsx";
-import * as $4 from "./routes/profile.tsx";
-import * as $5 from "./routes/signIn.tsx";
+import * as $1 from "./routes/api/career.tsx";
+import * as $2 from "./routes/api/signOut.tsx";
+import * as $3 from "./routes/career.tsx";
+import * as $4 from "./routes/index.tsx";
+import * as $5 from "./routes/profile.tsx";
+import * as $6 from "./routes/signIn.tsx";
 import * as $$0 from "./islands/careers.tsx";
 import * as $$1 from "./islands/replace.tsx";
 
 const manifest = {
   routes: {
     "./routes/_app.tsx": $0,
-    "./routes/api/signOut.tsx": $1,
-    "./routes/career.tsx": $2,
-    "./routes/index.tsx": $3,
-    "./routes/profile.tsx": $4,
-    "./routes/signIn.tsx": $5,
+    "./routes/api/career.tsx": $1,
+    "./routes/api/signOut.tsx": $2,
+    "./routes/career.tsx": $3,
+    "./routes/index.tsx": $4,
+    "./routes/profile.tsx": $5,
+    "./routes/signIn.tsx": $6,
   },
   islands: {
     "./islands/careers.tsx": $$0,
