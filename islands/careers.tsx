@@ -120,6 +120,13 @@ function CareerDialog() {
     })
   }
 
+  const handleFormInit = () => {
+    setCompany('');
+    setJob('');
+    setInDate('')
+    setOutDate('')
+  }
+
   return (
     <div class={tw`bg-gray-50 max-w-3xl w-full h-full mx-auto divide-y divide-rose-900 rounded-t-lg p-2`}>
       <div class={tw`flex justify-between`}>
@@ -154,7 +161,11 @@ function CareerDialog() {
           <span> ~ </span>
           <input class={tw`border`} for='date' value={outDate} onInput={handleOutDate} />
         </div>
-        <div class={tw`flex justify-end mt-2`}><button onClick={handleAddCareer} class={tw`rounded p-1 pl-2 pr-2 bg-blue-400`}>추가</button></div>
+        <div class={tw`flex justify-end mt-2`}><button onClick={(e) => {
+          handleAddCareer(e);
+          handleFormInit();
+          (e.target as HTMLButtonElement).closest("dialog")!.close();
+        }} class={tw`rounded p-1 pl-2 pr-2 bg-blue-400`}>추가</button></div>
       </div>
     </div>
   )
