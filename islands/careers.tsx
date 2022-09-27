@@ -67,7 +67,7 @@ export default function Careers() {
       <div class={tw`rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12`}>
         {
           data?.map((career) => {
-            return <CareerCard company={career.companyName} job={career.job} inAt={career.inAt} outAt={career.outAt} />
+            return <CareerCard company={career.company} job={career.job} inAt={career.inAt} outAt={career.outAt} />
           })
         }
       </div>
@@ -109,7 +109,7 @@ function CareerDialog() {
     e.preventDefault();
 
     await addToCareer({
-      companyName: company,
+      company,
       job,
       inAt,
       outAt,

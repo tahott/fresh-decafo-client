@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface Career {
-  companyName: string;
+  company: string;
   job: string;
   inAt: string;
   outAt: string;

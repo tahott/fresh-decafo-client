@@ -12,7 +12,7 @@ export async function handler(req: Request): Promise<Response> {
 
       return new Response(JSON.stringify(careers.data.map((career: Career) => {
         return {
-          companyName: career.companyName,
+          company: career.company,
           job: career.job,
           inAt: career.inAt,
           outAt: career.outAt || 'until now'
