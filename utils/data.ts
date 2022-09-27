@@ -1,13 +1,5 @@
 import useSWR, { mutate } from 'swr';
-
-interface Career {
-  company: string;
-  job: string;
-  date: {
-    in: string;
-    out: string;
-  }
-}
+import { Career } from "./types.ts";
 
 async function careerFetcher(): Promise<Career[]> {
   const res = await fetch('/api/career', {
@@ -18,12 +10,12 @@ async function careerFetcher(): Promise<Career[]> {
 }
 
 export async function addToCareer(career: Career) {
-  const res = await fetch('/api/career', {
+  await fetch('/api/career', {
     method: 'POST',
     body: JSON.stringify(career),
   });
 
-  await mutate('career', await res.json());
+  await mutate('career', careerFetcher);
 }
 
 export function useCareer() {

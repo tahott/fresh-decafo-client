@@ -6,10 +6,8 @@ import { tw } from '@twind';
 interface CareerProps {
   company: string;
   job: string;
-  date: {
-    in: string;
-    out: string;
-  }
+  inAt: string;
+  outAt: string;
 }
 
 export default function CareerCard(props: CareerProps) {
@@ -26,7 +24,7 @@ export default function CareerCard(props: CareerProps) {
       <div class={tw`career_card col-start-2 col-end-12 pt-4`}>
         <div class={tw`font-bold`}>{props.company}</div>
         <div>{props.job}</div>
-        <div>{props.date.in}{" ~ "}{props.date.out}</div>
+        <div>{props.inAt}{" ~ "}{props.outAt}</div>
       </div>
     </div>
   )

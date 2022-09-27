@@ -31,10 +31,8 @@ const backdrop = css({
 interface Career {
   company: string;
   job: string;
-  date: {
-    in: string;
-    out: string;
-  }
+  inAt: string;
+  outAt: string;
 }
 
 export default function Careers() {
@@ -69,7 +67,7 @@ export default function Careers() {
       <div class={tw`rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12`}>
         {
           data?.map((career) => {
-            return <CareerCard company={career.company} job={career.job} date={career.date} />
+            return <CareerCard company={career.companyName} job={career.job} inAt={career.inAt} outAt={career.outAt} />
           })
         }
       </div>
@@ -88,8 +86,8 @@ export default function Careers() {
 function CareerDialog() {
   const [company, setCompany] = useState('');
   const [job, setJob] = useState('');
-  const [inDate, setInDate] = useState('');
-  const [outDate, setOutDate] = useState('');
+  const [inAt, setInAt] = useState('');
+  const [outAt, setOutAt] = useState('');
 
   const handleCompany = (e: Event) => {
     setCompany((e.currentTarget as HTMLInputElement).value)
@@ -100,31 +98,29 @@ function CareerDialog() {
   }
 
   const handleInDate = (e: Event) => {
-    setInDate((e.currentTarget as HTMLInputElement).value)
+    setInAt((e.currentTarget as HTMLInputElement).value)
   }
 
   const handleOutDate = (e: Event) => {
-    setOutDate((e.currentTarget as HTMLInputElement).value)
+    setOutAt((e.currentTarget as HTMLInputElement).value)
   }
 
-  const handleAddCareer = (e: h.JSX.TargetedMouseEvent<HTMLButtonElement>) => {
+  const handleAddCareer = async (e: h.JSX.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    addToCareer({
-      company,
+    await addToCareer({
+      companyName: company,
       job,
-      date: {
-        in: inDate,
-        out: outDate,
-      }
+      inAt,
+      outAt,
     })
   }
 
   const handleFormInit = () => {
     setCompany('');
     setJob('');
-    setInDate('')
-    setOutDate('')
+    setInAt('')
+    setOutAt('')
   }
 
   return (
@@ -157,9 +153,9 @@ function CareerDialog() {
         </div>
         <div class={tw`mt-1`}>
           <label class={tw`inline-block w-[100px]`} id='date'>date</label>
-          <input class={tw`ml-2 border`} for='date' value={inDate} onInput={handleInDate} />
+          <input class={tw`ml-2 border`} for='date' value={inAt} onInput={handleInDate} />
           <span> ~ </span>
-          <input class={tw`border`} for='date' value={outDate} onInput={handleOutDate} />
+          <input class={tw`border`} for='date' value={outAt} onInput={handleOutDate} />
         </div>
         <div class={tw`flex justify-end mt-2`}><button onClick={(e) => {
           handleAddCareer(e);
