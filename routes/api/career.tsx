@@ -25,16 +25,12 @@ export async function handler(req: Request): Promise<Response> {
       const text = await req.text()
       const body = JSON.stringify(Object.assign(JSON.parse(text), { userId: payload.user?.id }));
 
-      const res = await fetch(`${Deno.env.get('BASE_URL')}/career`, {
+      return await fetch(`${Deno.env.get('BASE_URL')}/career`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body,
-      })
-
-      return new Response(null, {
-        status: 201,
       })
     }
     case 'DELETE':

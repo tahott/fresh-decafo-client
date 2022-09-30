@@ -108,12 +108,16 @@ function CareerDialog() {
   const handleAddCareer = async (e: h.JSX.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    await addToCareer({
+    const res = await addToCareer({
       company,
       job,
       inAt,
       outAt,
     })
+
+    if (!res) {
+      alert('등록 실패')
+    }
   }
 
   const handleFormInit = () => {

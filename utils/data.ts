@@ -10,12 +10,17 @@ async function careerFetcher(): Promise<Career[]> {
 }
 
 export async function addToCareer(career: Career) {
-  await fetch('/api/career', {
+  const res = await fetch('/api/career', {
     method: 'POST',
     body: JSON.stringify(career),
   });
 
+  if (res.status !== 201) {
+    return false;
+  }
+
   await mutate('career', careerFetcher);
+  return true
 }
 
 export function useCareer() {
