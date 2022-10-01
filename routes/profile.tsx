@@ -45,7 +45,13 @@ export default function Profile({ data }: PageProps<ProfileProps>) {
           {
             data.user && (
               <div>
-                <div>{data.user.name}</div>
+                <div class={tw`grid grid-cols-4 grid-flow-col gap-4`}>
+                  <div class={tw`row-span-3`}>
+                    <div class={tw`flex justify-center`}><img class={tw`rounded-full max-w-[128px] w-[128px]`} src={data.user.avatar_url} /></div>
+                  </div>
+                  <div class={tw`col-span-3`}>{data.user.name}</div>
+                  <div class={tw`row-span-2 col-span-3`}></div>
+                </div>
                 <Careers />
               </div>
             )

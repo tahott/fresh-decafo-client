@@ -51,9 +51,11 @@ export default function Careers() {
   }
 
   if (error) {
-    <div>
-      Error: {error.message}
-    </div>
+    return (
+      <div>
+        Error: {error.message}
+      </div>
+    )
   }
 
   return (
@@ -66,9 +68,13 @@ export default function Careers() {
       </div>
       <div class={tw`rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12`}>
         {
-          data?.map((career) => {
-            return <CareerCard company={career.company} job={career.job} inAt={career.inAt} outAt={career.outAt} />
-          })
+          data && data.length > 0 ? (
+            data?.map((career) => {
+              return <CareerCard company={career.company} job={career.job} inAt={career.inAt} outAt={career.outAt} />
+            })
+          ) : (
+              <div class={tw`col-span-12`}>등록 된 경력이 없습니다</div>
+          )
         }
       </div>
       <dialog
