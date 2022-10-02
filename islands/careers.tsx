@@ -7,6 +7,7 @@ import { animation, css } from 'twind/css';
 import { useRef, useState, useEffect } from 'preact/hooks';
 import CareerCard from '../components/CareerCard.tsx';
 import { addToCareer, useCareer } from '../utils/data.ts';
+import { KeyboardEvent } from 'https://esm.sh/v95/@types/react@18.0.18/X-ZS9wcmVhY3QvY29tcGF0/index.d.ts';
 
 declare global {
   interface HTMLDialogElement {
@@ -104,11 +105,17 @@ function CareerDialog() {
   }
 
   const handleInDate = (e: Event) => {
-    setInAt((e.currentTarget as HTMLInputElement).value)
+    setInAt((e.currentTarget as HTMLInputElement).value);
   }
 
   const handleOutDate = (e: Event) => {
     setOutAt((e.currentTarget as HTMLInputElement).value)
+  }
+
+  const isNumeric = (e: Event) => {
+    if (!/[0-9]/g.test((e as unknown as KeyboardEvent<HTMLInputElement>).key)) {
+      e.preventDefault();
+    }
   }
 
   const handleAddCareer = async (e: h.JSX.TargetedMouseEvent<HTMLButtonElement>) => {
@@ -163,9 +170,9 @@ function CareerDialog() {
         </div>
         <div class={tw`mt-1`}>
           <label class={tw`inline-block w-[100px]`} id='date'>date</label>
-          <input class={tw`ml-2 border`} for='date' value={inAt} onInput={handleInDate} />
+          <input class={tw`ml-2 border p-1`} for='date' placeholder='yyyyMM' maxLength={6} value={inAt} onChange={handleInDate} onKeyDown={isNumeric} />
           <span> ~ </span>
-          <input class={tw`border`} for='date' value={outAt} onInput={handleOutDate} />
+          <input class={tw`ml-2 border p-1`} for='date' placeholder='yyyyMM' maxLength={6} value={outAt} onInput={handleOutDate} onKeyDown={isNumeric} />
         </div>
         <div class={tw`flex justify-end mt-2`}><button onClick={(e) => {
           handleAddCareer(e);
