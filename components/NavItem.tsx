@@ -1,8 +1,3 @@
-/** @jsx h */
-
-import { h } from 'preact';
-import { tw } from '@twind';
-
 interface NavItemProps {
   active: string;
   name: string;
@@ -14,9 +9,7 @@ export default function NavItem({active, name, href }: NavItemProps) {
     <li>
       <a
         href={href}
-        class={tw`text-gray-800 hover:underline ${
-          active === href ? 'font-bold' : ''
-        }`}
+        class={`text-gray-800 hover:underline ${active === href ? 'font-bold' : ''}`}
       >
         {name}
       </a>

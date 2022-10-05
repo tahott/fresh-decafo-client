@@ -1,9 +1,4 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-
-import { h, Fragment } from 'preact';
 import { Handlers, HandlerContext, PageProps } from '$fresh/server.ts';
-import { tw } from '@twind';
 import * as djwt from 'https://deno.land/x/djwt@v2.7/mod.ts';
 import NavigationBar from '../components/Navbar.tsx';
 import { JwtDecode } from "../utils/types.ts";
@@ -34,7 +29,7 @@ export default function Career({ data }: PageProps<CareerProps>) {
   return (
     <>
       <NavigationBar active='/career' isLogin={data.isLogin} />
-      <div class={tw`p-4 mx-auto max-w-screen-lg`}>
+      <div class="p-4 mx-auto max-w-screen-lg">
         <div>Hello, Career page</div>
       </div>
     </>

@@ -1,13 +1,9 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
-
-import { h, Fragment } from 'preact';
-import { tw } from '@twind';
 import { animation, css } from 'twind/css';
 import { useRef, useState, useEffect } from 'preact/hooks';
 import CareerCard from '../components/CareerCard.tsx';
 import { addToCareer, useCareer } from '../utils/data.ts';
 import { KeyboardEvent } from 'https://esm.sh/v95/@types/react@18.0.18/X-ZS9wcmVhY3QvY29tcGF0/index.d.ts';
+import { JSXInternal } from 'https://esm.sh/v95/preact@10.11.0/src/jsx.d.ts';
 
 declare global {
   interface HTMLDialogElement {
@@ -19,22 +15,13 @@ declare global {
 const slideBottom = animation("0.4s ease normal", {
   from: { transform: "translateY(100%)" },
   to: { transform: "translateY(0)" },
-// deno-lint-ignore no-explicit-any
-}) as any;
+});
 
 const backdrop = css({
   "&::backdrop": {
     background: "rgba(0, 0, 0, 0.5)",
   },
-// deno-lint-ignore no-explicit-any
-}) as any;
-
-interface Career {
-  company: string;
-  job: string;
-  inAt: string;
-  outAt: string;
-}
+});
 
 export default function Careers() {
   const { data, error } = useCareer();
@@ -61,27 +48,26 @@ export default function Careers() {
 
   return (
     <>
-      <div class={tw`flex justify-between`}>
+      <div class="flex justify-between">
         <div>Career</div>
         <div>
           <button onClick={() => ref.current?.showModal()}>Add</button>
         </div>
       </div>
-      <div class={tw`rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12`}>
+      <div class="rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12">
         {
           data && data.length > 0 ? (
             data?.map((career) => {
               return <CareerCard company={career.company} job={career.job} inAt={career.inAt} outAt={career.outAt} />
             })
           ) : (
-              <div class={tw`col-span-12`}>등록 된 경력이 없습니다</div>
+              <div class="col-span-12">등록 된 경력이 없습니다</div>
           )
         }
       </div>
       <dialog
         ref={ref}
-        class={tw
-          `bg-transparent p-0 m-0 pt-[30%] max-w-full w-full max-h-full ${slideBottom} ${backdrop}`}
+        class={`bg-transparent p-0 m-0 pt-[30%] max-w-full w-full max-h-full ${slideBottom} ${backdrop}`}
         onClick={onDialogClick}
       >
         <CareerDialog />
@@ -118,7 +104,7 @@ function CareerDialog() {
     }
   }
 
-  const handleAddCareer = async (e: h.JSX.TargetedMouseEvent<HTMLButtonElement>) => {
+  const handleAddCareer = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const res = await addToCareer({
@@ -141,17 +127,17 @@ function CareerDialog() {
   }
 
   return (
-    <div class={tw`bg-gray-50 max-w-3xl w-full h-full mx-auto divide-y divide-rose-900 rounded-t-lg p-2`}>
-      <div class={tw`flex justify-between`}>
-        <h2 class={tw`text-lg font-medium text-gray-900`}>Regist Career</h2>
+    <div class="bg-gray-50 max-w-3xl w-full h-full mx-auto divide-y divide-rose-900 rounded-t-lg p-2">
+      <div class="flex justify-between">
+        <h2 class="text-lg font-medium text-gray-900">Regist Career</h2>
         <button
-          class={tw`py-1`}
+          class="py-1"
           onClick={(e) => {
             (e.target as HTMLButtonElement).closest("dialog")!.close();
           }}
         >
           <svg
-            class={tw`w-6 h-6 fill-current text-gray-600`}
+            class="w-6 h-6 fill-current text-gray-600"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -159,26 +145,26 @@ function CareerDialog() {
           </svg>
         </button>
       </div>
-      <div class={tw`p-2`}>
-        <div class={tw`mt-1`}>
-          <label class={tw`inline-block w-[100px]`} id='company'>company</label>
-          <input class={tw`ml-2 border`} for='company' value={company} onInput={handleCompany} />
+      <div class="p-2">
+        <div class="mt-1">
+          <label class="inline-block w-[100px]" id='company'>company</label>
+          <input class="ml-2 border" for='company' value={company} onInput={handleCompany} />
         </div>
-        <div class={tw`mt-1`}>
-          <label class={tw`inline-block w-[100px]`} id='job'>job</label>
-          <input class={tw`ml-2 border`} for='job' value={job} onInput={handleJob} />
+        <div class="mt-1">
+          <label class="inline-block w-[100px]" id='job'>job</label>
+          <input class="ml-2 border" for='job' value={job} onInput={handleJob} />
         </div>
-        <div class={tw`mt-1`}>
-          <label class={tw`inline-block w-[100px]`} id='date'>date</label>
-          <input class={tw`ml-2 border p-1`} for='date' placeholder='yyyyMM' maxLength={6} value={inAt} onChange={handleInDate} onKeyDown={isNumeric} />
+        <div class="mt-1">
+          <label class="inline-block w-[100px]" id='date'>date</label>
+          <input class="ml-2 border p-1" for='date' placeholder='yyyyMM' maxLength={6} value={inAt} onChange={handleInDate} onKeyDown={isNumeric} />
           <span> ~ </span>
-          <input class={tw`ml-2 border p-1`} for='date' placeholder='yyyyMM' maxLength={6} value={outAt} onInput={handleOutDate} onKeyDown={isNumeric} />
+          <input class="ml-2 border p-1" for='date' placeholder='yyyyMM' maxLength={6} value={outAt} onInput={handleOutDate} onKeyDown={isNumeric} />
         </div>
-        <div class={tw`flex justify-end mt-2`}><button onClick={(e) => {
+        <div class="flex justify-end mt-2"><button onClick={(e) => {
           handleAddCareer(e);
           handleFormInit();
           (e.target as HTMLButtonElement).closest("dialog")!.close();
-        }} class={tw`rounded p-1 pl-2 pr-2 bg-blue-400`}>추가</button></div>
+        }} class="rounded p-1 pl-2 pr-2 bg-blue-400">추가</button></div>
       </div>
     </div>
   )
