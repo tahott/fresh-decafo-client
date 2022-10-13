@@ -1,4 +1,3 @@
-import { Menu } from '@headlessui/react';
 import NavItem from './NavItem.tsx';
 
 interface NavbarProps {
@@ -34,18 +33,6 @@ export default function Navbar({ active, isLogin }: NavbarProps) {
         <ul class="flex justify-end gap-8 mx-4">
           {items.map((item) => <NavItem active={active} name={item.name} href={item.href} />)}
         </ul>
-        <Menu>
-          <Menu.Button>More</Menu.Button>
-          <Menu.Items>
-            <Menu.Item>
-              {
-                ({ active }) => (
-                  <div class={active ? 'bg-orange-300' : 'bg-orange-100'}>Item1</div>
-                )
-              }
-            </Menu.Item>
-          </Menu.Items>
-        </Menu>
       </div>
     </nav>
   );
