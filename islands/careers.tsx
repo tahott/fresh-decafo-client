@@ -4,6 +4,7 @@ import CareerCard from '../components/CareerCard.tsx';
 import { addToCareer, useCareer } from '../utils/data.ts';
 import { KeyboardEvent } from 'https://esm.sh/v95/@types/react@18.0.18/X-ZS9wcmVhY3QvY29tcGF0/index.d.ts';
 import { JSXInternal } from 'https://esm.sh/v95/preact@10.11.0/src/jsx.d.ts';
+import Input from '../components/Input.tsx';
 
 declare global {
   interface HTMLDialogElement {
@@ -106,17 +107,17 @@ function CareerDialog() {
 
   const handleAddCareer = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    console.log(company, job, inAt, outAt);
+    // const res = await addToCareer({
+    //   company,
+    //   job,
+    //   inAt,
+    //   outAt,
+    // })
 
-    const res = await addToCareer({
-      company,
-      job,
-      inAt,
-      outAt,
-    })
-
-    if (!res) {
-      alert('등록 실패')
-    }
+    // if (!res) {
+    //   alert('등록 실패')
+    // }
   }
 
   const handleFormInit = () => {
@@ -146,19 +147,25 @@ function CareerDialog() {
         </button>
       </div>
       <div class="p-2">
-        <div class="mt-1">
-          <label class="inline-block w-[100px]" id='company'>company</label>
-          <input class="ml-2 border" for='company' value={company} onInput={handleCompany} />
+        <div class="mt-1 grid grid-cols-8">
+          <div>회사</div>
+          <div class="col-span-7"><Input onChange={handleCompany} /></div>
         </div>
-        <div class="mt-1">
-          <label class="inline-block w-[100px]" id='job'>job</label>
-          <input class="ml-2 border" for='job' value={job} onInput={handleJob} />
+        <div class="mt-1 grid grid-cols-8">
+          <div>직책</div>
+          <div class="col-span-7"><Input onChange={handleJob} /></div>
         </div>
-        <div class="mt-1">
-          <label class="inline-block w-[100px]" id='date'>date</label>
-          <input class="ml-2 border p-1" for='date' placeholder='yyyyMM' maxLength={6} value={inAt} onChange={handleInDate} onKeyDown={isNumeric} />
-          <span> ~ </span>
-          <input class="ml-2 border p-1" for='date' placeholder='yyyyMM' maxLength={6} value={outAt} onInput={handleOutDate} onKeyDown={isNumeric} />
+        <div class="mt-1 grid grid-cols-8">
+          <div>입사일</div>
+          <div class="col-span-7">
+            <Input placeholder='yyyyMM' maxLength={6} value={inAt} onChange={handleInDate} />
+          </div>
+        </div>
+        <div class="mt-1 grid grid-cols-8">
+          <div>퇴사일</div>
+          <div class="col-span-7">
+            <Input placeholder='yyyyMM' maxLength={6} value={outAt} onChange={handleOutDate} />
+          </div>
         </div>
         <div class="flex justify-end mt-2"><button onClick={(e) => {
           handleAddCareer(e);
