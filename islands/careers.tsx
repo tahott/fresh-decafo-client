@@ -107,30 +107,30 @@ function CareerDialog() {
 
   const handleAddCareer = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(company, job, inAt, outAt);
-    // const res = await addToCareer({
-    //   company,
-    //   job,
-    //   inAt,
-    //   outAt,
-    // })
 
-    // if (!res) {
-    //   alert('등록 실패')
-    // }
+    const res = await addToCareer({
+      company,
+      job,
+      inAt,
+      outAt,
+    })
+
+    if (!res) {
+      alert('등록 실패')
+    }
   }
 
-  const handleFormInit = () => {
+  const handleFormReset = () => {
     setCompany('');
     setJob('');
-    setInAt('')
-    setOutAt('')
+    setInAt('');
+    setOutAt('');
   }
 
   return (
     <div class="bg-gray-50 max-w-3xl w-full h-full mx-auto divide-y divide-rose-900 rounded-t-lg p-2">
       <div class="flex justify-between">
-        <h2 class="text-lg font-medium text-gray-900">Regist Career</h2>
+        <h2 class="text-lg font-medium text-gray-900">경력 추가</h2>
         <button
           class="py-1"
           onClick={(e) => {
@@ -158,18 +158,18 @@ function CareerDialog() {
         <div class="mt-1 grid grid-cols-8">
           <div>입사일</div>
           <div class="col-span-7">
-            <Input placeholder='yyyyMM' maxLength={6} value={inAt} onChange={handleInDate} />
+            <Input placeholder='yyyyMM' maxLength={6} onChange={handleInDate} />
           </div>
         </div>
         <div class="mt-1 grid grid-cols-8">
           <div>퇴사일</div>
           <div class="col-span-7">
-            <Input placeholder='yyyyMM' maxLength={6} value={outAt} onChange={handleOutDate} />
+            <Input placeholder='yyyyMM' maxLength={6} onChange={handleOutDate} />
           </div>
         </div>
         <div class="flex justify-end mt-2"><button onClick={(e) => {
           handleAddCareer(e);
-          handleFormInit();
+          handleFormReset();
           (e.target as HTMLButtonElement).closest("dialog")!.close();
         }} class="rounded p-1 pl-2 pr-2 bg-blue-400">추가</button></div>
       </div>

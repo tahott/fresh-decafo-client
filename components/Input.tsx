@@ -11,8 +11,9 @@ interface InputProps {
 export default function Input({ onChange, ...props }: InputProps) {
   return (
     <input
-      class="ml-2 border w-full"
+      class="ml-2 border w-full p-1"
       onInput={onChange}
+      {...props}
     />
   )
 }
