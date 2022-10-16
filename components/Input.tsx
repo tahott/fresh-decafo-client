@@ -1,7 +1,7 @@
-import { ChangeEvent } from "https://esm.sh/v95/@types/react@18.0.18/X-ZS9wcmVhY3QvY29tcGF0/index.d.ts";
 import { JSXInternal } from "https://esm.sh/v95/preact@10.11.0/src/jsx.d.ts";
 
 interface InputProps {
+  type?: string;
   value?: string;
   placeholder?: string;
   maxLength?: number;

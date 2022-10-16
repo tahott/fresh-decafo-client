@@ -82,6 +82,8 @@ function CareerDialog() {
   const [job, setJob] = useState('');
   const [inAt, setInAt] = useState('');
   const [outAt, setOutAt] = useState('');
+  const [isFocus, setFocus] = useState(false);
+  const [companyList, setCompanyList] = useState([]);
 
   const handleCompany = (e: Event) => {
     setCompany((e.currentTarget as HTMLInputElement).value)
@@ -149,22 +151,33 @@ function CareerDialog() {
       <div class="p-2">
         <div class="mt-1 grid grid-cols-8">
           <div>회사</div>
-          <div class="col-span-7"><Input onChange={handleCompany} /></div>
+          <div class="col-span-7">
+            <div class="relative w-full border ml-2">
+              <input class="w-full outline-none p-1" type='search' value={company} onChange={handleCompany} onFocus={() => setFocus(true)} />
+              <div id="searchList" class={`${isFocus ? 'absolute w-full' : 'hidden'}`}>
+                {
+                  companyList.length === 0 ? (
+                    <div class="p-1 w-full bg-gray-900 text-white">No results found.</div>
+                  ) : companyList.map((c) => <div onClick={() => {setCompany(c); setFocus(false);}} class="p-1 w-full bg-gray-900 text-white cursor-pointer">{c}</div>)
+                }
+              </div>
+            </div>
+          </div>
         </div>
         <div class="mt-1 grid grid-cols-8">
           <div>직책</div>
-          <div class="col-span-7"><Input onChange={handleJob} /></div>
+          <div class="col-span-7"><Input type='text' onChange={handleJob} /></div>
         </div>
         <div class="mt-1 grid grid-cols-8">
           <div>입사일</div>
           <div class="col-span-7">
-            <Input placeholder='yyyyMM' maxLength={6} onChange={handleInDate} />
+            <Input type='text' placeholder='yyyyMM' maxLength={6} onChange={handleInDate} />
           </div>
         </div>
         <div class="mt-1 grid grid-cols-8">
           <div>퇴사일</div>
           <div class="col-span-7">
-            <Input placeholder='yyyyMM' maxLength={6} onChange={handleOutDate} />
+            <Input type='text' placeholder='yyyyMM' maxLength={6} onChange={handleOutDate} />
           </div>
         </div>
         <div class="flex justify-end mt-2"><button onClick={(e) => {
