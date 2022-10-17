@@ -83,7 +83,8 @@ function CareerDialog() {
   const [inAt, setInAt] = useState('');
   const [outAt, setOutAt] = useState('');
   const [isFocus, setFocus] = useState(false);
-  const [companyList, setCompanyList] = useState([]);
+  const [companyList, setCompanyList] = useState(['당근마켓', '토스']);
+  const [currentIdx, setIndex] = useState(-1);
 
   const handleCompany = (e: Event) => {
     setCompany((e.currentTarget as HTMLInputElement).value)
@@ -129,6 +130,16 @@ function CareerDialog() {
     setOutAt('');
   }
 
+  const handleCompanyKeyUp = (e: Event) => {
+    if (['ArrowDown'].includes((e as unknown as KeyboardEvent<HTMLInputElement>).key)) {
+      const idx = currentIdx;
+
+      if (idx < 0) {
+        setIndex(idx + 1);
+      }
+    }
+  }
+
   return (
     <div class="bg-gray-50 max-w-3xl w-full h-full mx-auto divide-y divide-rose-900 rounded-t-lg p-2">
       <div class="flex justify-between">
@@ -153,12 +164,12 @@ function CareerDialog() {
           <div>회사</div>
           <div class="col-span-7">
             <div class="relative w-full border ml-2">
-              <input class="w-full outline-none p-1" type='search' value={company} onChange={handleCompany} onFocus={() => setFocus(true)} />
+              <input class="w-full outline-none p-1" type='search' value={company} onChange={handleCompany} onKeyDown={handleCompanyKeyUp} onFocus={() => setFocus(true)} />
               <div id="searchList" class={`${isFocus ? 'absolute w-full' : 'hidden'}`}>
                 {
                   companyList.length === 0 ? (
                     <div class="p-1 w-full bg-gray-900 text-white">No results found.</div>
-                  ) : companyList.map((c) => <div onClick={() => {setCompany(c); setFocus(false);}} class="p-1 w-full bg-gray-900 text-white cursor-pointer">{c}</div>)
+                  ) : companyList.map((c, i) => <div onClick={() => { setCompany(c); setFocus(false); }} id={`item-${i}`} class={`item p-1 w-full ${currentIdx === i ? 'bg-gray-500' : 'bg-gray-900'} text-white cursor-pointer hover:bg-gray-700`}>{c}</div>)
                 }
               </div>
             </div>
