@@ -13,6 +13,13 @@ declare global {
   }
 }
 
+enum Key {
+  Down = 'ArrowDown',
+  Up = 'ArrowUp',
+  Enter = 'Enter',
+  Esc = 'Escape',
+}
+
 const slideBottom = animation("0.4s ease normal", {
   from: { transform: "translateY(100%)" },
   to: { transform: "translateY(0)" },
@@ -130,12 +137,39 @@ function CareerDialog() {
     setOutAt('');
   }
 
-  const handleCompanyKeyUp = (e: Event) => {
-    if (['ArrowDown'].includes((e as unknown as KeyboardEvent<HTMLInputElement>).key)) {
+  const handleCompanyKeyDown = (e: JSXInternal.TargetedKeyboardEvent<HTMLInputElement>) => {
+    if (e.key === Key.Down) {
+      setFocus(true);
+      const classes = document.getElementsByClassName('item');
       const idx = currentIdx;
 
-      if (idx < 0) {
+      if (idx < classes.length - 1) {
         setIndex(idx + 1);
+        const s = document.getElementById('searchInput');
+        const t = document.getElementById(`item-${idx + 1}`);
+        s?.setAttribute('placeholder', t!.innerText);
+      }
+    }
+
+    if (e.key === Key.Up) {
+      setFocus(true);
+      const idx = currentIdx;
+
+      if (idx > 0) {
+        setIndex(idx - 1);
+        const s = document.getElementById('searchInput');
+        const t = document.getElementById(`item-${idx - 1}`);
+        s?.setAttribute('placeholder', t!.innerText);
+      }
+    }
+
+    if (e.key === Key.Enter || e.key === Key.Esc) {
+      e.preventDefault();
+      setFocus(false);
+      const s = document.getElementById('searchInput');
+      const placeholder = s?.getAttribute('placeholder');
+      if (placeholder) {
+        setCompany(placeholder);
       }
     }
   }
@@ -164,7 +198,7 @@ function CareerDialog() {
           <div>회사</div>
           <div class="col-span-7">
             <div class="relative w-full border ml-2">
-              <input class="w-full outline-none p-1" type='search' value={company} onChange={handleCompany} onKeyDown={handleCompanyKeyUp} onFocus={() => setFocus(true)} />
+              <input id="searchInput" class="w-full outline-none p-1" type='search' value={company} onChange={handleCompany} onKeyDown={handleCompanyKeyDown} onfocusin={() => setFocus(true)} onfocusout={() => setFocus(false)} autocomplete='off' />
               <div id="searchList" class={`${isFocus ? 'absolute w-full' : 'hidden'}`}>
                 {
                   companyList.length === 0 ? (
