@@ -55,11 +55,11 @@ export default function Careers() {
   }
 
   return (
-    <>
+    <div class="mt-2">
       <div class="flex justify-between">
-        <div>Career</div>
-        <div>
-          <button onClick={() => ref.current?.showModal()}>Add</button>
+        <div class="pl-2">경력</div>
+        <div class="pr-2">
+          <button onClick={() => ref.current?.showModal()}>추가</button>
         </div>
       </div>
       <div class="rounded bg-gray-300 career_card_list flex flex-col m-2 mt-0 p-2 pl-[16px] pr-[16px] md:grid grid-cols-12">
@@ -80,7 +80,7 @@ export default function Careers() {
       >
         <CareerDialog />
       </dialog>
-    </>
+    </div>
   )
 }
 

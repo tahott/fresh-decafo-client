@@ -19,3 +19,7 @@ export interface Career {
   inAt: string;
   outAt: string;
 }
+
+export interface Channel {
+  name: string;
+}
