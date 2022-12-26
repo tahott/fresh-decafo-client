@@ -28,14 +28,14 @@ export const handler: Handlers = {
       localStorage.removeItem('token')
     }
 
-    return await ctx.render({ isLogin: false })
+    return await ctx.render({ isLogin: false, authUrl: ctx.state.authUrl })
   }
 }
 
 export default function Profile({ data }: PageProps<ProfileProps>) {
   return (
     <>
-      <NavigationBar active='/profile' isLogin={data.isLogin} />
+      <NavigationBar active='/profile' isLogin={data.isLogin} authUrl={data.authUrl!} />
       <div class="p-4 mx-auto max-w-screen-lg">
         <div>
           {

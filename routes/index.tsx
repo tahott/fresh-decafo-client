@@ -5,6 +5,7 @@ import { JwtDecode } from "../utils/types.ts";
 
 interface IndexProps {
   isLogin: boolean;
+  authUrl: string;
 }
 
 export const handler: Handlers = {
@@ -15,20 +16,20 @@ export const handler: Handlers = {
       const [_, payload, __] = djwt.decode(hasToken!) as JwtDecode;
 
       if (payload.exp > new Date().getTime()) {
-        return await ctx.render({ isLogin: true });
+        return await ctx.render({ isLogin: true, authUrl: '' });
       }
 
       localStorage.removeItem('token')
     }
 
-    return await ctx.render({ isLogin: false })
+    return await ctx.render({ isLogin: false, authUrl: ctx.state.authUrl })
   }
 }
 
 export default function Home({ data }: PageProps<IndexProps>) {
   return (
     <>
-      <NavigationBar active='/' isLogin={data.isLogin} />
+      <NavigationBar active='/' isLogin={data.isLogin} authUrl={data.authUrl} />
       <div class="p-4 mx-auto max-w-screen-lg">
         <img
           src='/logo.svg'

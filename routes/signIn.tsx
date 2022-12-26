@@ -13,7 +13,7 @@ export const handler: Handlers = {
     const code = url.searchParams.get('code');
 
     if (!code) {
-      const response = await fetch(`${Deno.env.get('BASE_URL')}/authorization/code`)
+      const response = await fetch(`${Deno.env.get('BASE_URL')}/authorization/code`);
       const authUrl = await response.json();
       return await ctx.render({ authUrl });
     }
@@ -44,7 +44,7 @@ export default function SignIn({ data }: PageProps<SignInProps>) {
 
   return (
     <>
-      <NavigationBar active='/signIn' isLogin={data.isLogin} />
+      <NavigationBar active='/signIn' isLogin={data.isLogin} authUrl={data.authUrl!} />
       <div class="flex justify-center items-center flex-col h-screen">
         <a
           href={data.authUrl}

@@ -3,9 +3,10 @@ import NavItem from './NavItem.tsx';
 interface NavbarProps {
   active: string;
   isLogin: boolean;
+  authUrl: string | null;
 }
 
-export default function Navbar({ active, isLogin }: NavbarProps) {
+export default function Navbar({ active, isLogin, authUrl }: NavbarProps) {
   const items = [
     {
       name: 'Career',
@@ -16,9 +17,9 @@ export default function Navbar({ active, isLogin }: NavbarProps) {
       href: '/profile'
     },
     {
-      name: !isLogin ? 'Sign In' : 'Sign Out',
-      href: !isLogin ? '/signIn' : '/api/signOut'
-    }
+      name: authUrl ? 'Sign In' : 'Sign Out',
+      href: authUrl ? authUrl : '/api/signOut'
+    },
   ];
 
   return (
