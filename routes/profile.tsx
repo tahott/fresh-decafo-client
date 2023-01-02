@@ -35,7 +35,7 @@ export const handler: Handlers = {
 export default function Profile({ data }: PageProps<ProfileProps>) {
   return (
     <>
-      <NavigationBar active='/profile' isLogin={data.isLogin} authUrl={data.authUrl!} />
+      <NavigationBar active='/profile' isLogin={data.isLogin} authUrl={data.authUrl!} user={data.user} />
       <div class="p-4 mx-auto max-w-screen-lg">
         <div>
           {

@@ -1,12 +1,14 @@
+import { User } from '../utils/types.ts';
 import NavItem from './NavItem.tsx';
 
 interface NavbarProps {
   active: string;
   isLogin: boolean;
-  authUrl: string | null;
+  authUrl?: string;
+  user?: User;
 }
 
-export default function Navbar({ active, isLogin, authUrl }: NavbarProps) {
+export default function Navbar({ active, authUrl }: NavbarProps) {
   const items = [
     {
       name: 'Career',
