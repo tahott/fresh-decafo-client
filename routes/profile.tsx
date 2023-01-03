@@ -5,7 +5,6 @@ import Careers from '../islands/careers.tsx';
 import { Channel, JwtDecode, User } from "../utils/types.ts";
 
 interface ProfileProps {
-  isLogin: boolean;
   authUrl?: string;
   user?: User;
   channel?: Channel[];
@@ -19,23 +18,20 @@ export const handler: Handlers = {
       const [_, payload, __] = djwt.decode(hasToken!) as JwtDecode;
 
       if (payload.exp > new Date().getTime()) {
-        return await ctx.render({
-          isLogin: true,
-          user: payload.user,
-        });
+        return await ctx.render({ user: payload.user });
       }
 
       localStorage.removeItem('token')
     }
 
-    return await ctx.render({ isLogin: false, authUrl: ctx.state.authUrl })
+    return await ctx.render({ authUrl: ctx.state.authUrl })
   }
 }
 
 export default function Profile({ data }: PageProps<ProfileProps>) {
   return (
     <>
-      <NavigationBar active='/profile' isLogin={data.isLogin} authUrl={data.authUrl!} user={data.user} />
+      <NavigationBar active='/profile' user={data.user} authUrl={data.authUrl!} />
       <div class="p-4 mx-auto max-w-screen-lg">
         <div>
           {

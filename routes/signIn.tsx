@@ -44,7 +44,7 @@ export default function SignIn({ data }: PageProps<SignInProps>) {
 
   return (
     <>
-      <NavigationBar active='/signIn' isLogin={data.isLogin} authUrl={data.authUrl!} />
+      <NavigationBar active='/signIn' authUrl={data.authUrl!} />
       <div class="flex justify-center items-center flex-col h-screen">
         <a
           href={data.authUrl}

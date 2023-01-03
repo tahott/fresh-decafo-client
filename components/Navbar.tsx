@@ -3,9 +3,8 @@ import NavItem from './NavItem.tsx';
 
 interface NavbarProps {
   active: string;
-  isLogin: boolean;
-  authUrl?: string;
   user?: User;
+  authUrl?: string;
 }
 
 export default function Navbar({ active, authUrl }: NavbarProps) {
