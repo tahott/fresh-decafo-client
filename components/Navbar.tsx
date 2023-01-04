@@ -7,7 +7,7 @@ interface NavbarProps {
   authUrl?: string;
 }
 
-export default function Navbar({ active, authUrl }: NavbarProps) {
+export default function Navbar({ active, user, authUrl }: NavbarProps) {
   const items = [
     {
       name: 'Career',
@@ -16,10 +16,6 @@ export default function Navbar({ active, authUrl }: NavbarProps) {
     {
       name: 'My Profile',
       href: '/profile'
-    },
-    {
-      name: authUrl ? 'Sign In' : 'Sign Out',
-      href: authUrl ? authUrl : '/api/signOut'
     },
   ];
 
@@ -34,6 +30,15 @@ export default function Navbar({ active, authUrl }: NavbarProps) {
         </a>
         <ul class="flex justify-end gap-8 mx-4">
           {items.map((item) => <NavItem active={active} name={item.name} href={item.href} />)}
+          <li>
+            <a href={authUrl ? authUrl : '/api/signOut'}>
+              {
+                user?.avatar_url ? (
+                  <img src={user?.avatar_url} class="w-[24px] h-[24px] rounded" />
+                ) : <span>Sign In</span>
+              }
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
