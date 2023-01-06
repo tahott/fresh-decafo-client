@@ -1,5 +1,7 @@
+import { useState } from 'preact/hooks';
 import { User } from '../utils/types.ts';
-import NavItem from './NavItem.tsx';
+import NavItem from '../components/NavItem.tsx';
+
 
 interface NavbarProps {
   active: string;
@@ -8,6 +10,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ active, user, authUrl }: NavbarProps) {
+  const [modal, setModal] = useState('hidden');
   const items = [
     {
       name: 'Career',
@@ -18,6 +21,11 @@ export default function Navbar({ active, user, authUrl }: NavbarProps) {
       href: '/profile'
     },
   ];
+
+  const onDropdownClick = (e: MouseEvent) => {
+    e.preventDefault();
+    modal === 'hidden' ? setModal('block') : setModal('hidden')
+  }
 
   return (
     <nav class="bg(gray-50) py-2 border(t-2 b-2 gray-100)">
@@ -34,8 +42,8 @@ export default function Navbar({ active, user, authUrl }: NavbarProps) {
             {
               user?.avatar_url ? (
                 <div class="relative inline-block">
-                  <img src={user?.avatar_url} class="w-[24px] h-[24px] rounded" />
-                  <div class="absolute w-[100px] top-10 right-0 bg-gray-200">
+                  <div onClick={onDropdownClick}><img src={user?.avatar_url} class="w-[24px] h-[24px] rounded" /></div>
+                  <div class={`absolute w-[100px] top-10 right-0 bg-gray-200 ${modal}`} id="dropdown">
                     <a href="/api/signOut"><p class="px-2 py-1 text-indigo-500">sign out</p></a>
                   </div>
                 </div>

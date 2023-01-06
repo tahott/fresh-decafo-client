@@ -1,5 +1,5 @@
 import { Handlers, HandlerContext, PageProps } from '$fresh/server.ts';
-import NavigationBar from '../components/Navbar.tsx';
+import NavigationBar from '../islands/Navbar.tsx';
 import Replace from '../islands/replace.tsx';
 
 interface SignInProps {

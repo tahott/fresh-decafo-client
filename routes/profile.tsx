@@ -1,6 +1,6 @@
 import { HandlerContext, Handlers, PageProps } from '$fresh/server.ts';
 import * as djwt from 'https://deno.land/x/djwt@v2.7/mod.ts';
-import NavigationBar from '../components/Navbar.tsx';
+import NavigationBar from '../islands/Navbar.tsx';
 import Careers from '../islands/careers.tsx';
 import { Channel, JwtDecode, User } from "../utils/types.ts";
 
