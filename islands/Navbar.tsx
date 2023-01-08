@@ -1,4 +1,5 @@
 import { useState } from 'preact/hooks';
+import { Icon } from "@iconify/react";
 import { User } from '../utils/types.ts';
 import NavItem from '../components/NavItem.tsx';
 
@@ -36,14 +37,18 @@ export default function Navbar({ active, user, authUrl }: NavbarProps) {
           <img src='/logo.svg' width='32' />
           <b>DECAFO</b>
         </a>
-        <ul class="flex justify-end gap-8 mx-4">
+        <ul class="flex items-center justify-end gap-8 mx-4">
           {items.map((item) => <NavItem active={active} name={item.name} href={item.href} />)}
           <li>
             {
               user?.avatar_url ? (
                 <div class="relative inline-block">
-                  <div onClick={onDropdownClick}><img src={user?.avatar_url} class="w-[24px] h-[24px] rounded" /></div>
-                  <div class={`absolute w-[100px] top-10 right-0 bg-gray-200 ${modal}`} id="dropdown">
+                  <div onClick={onDropdownClick} class="flex items-center cursor-pointer">
+                    <img src={user?.avatar_url} class="w-[36px] h-[36px] rounded" />
+                    <Icon icon={"ic:round-keyboard-arrow-down"} />
+                  </div>
+                  <div class={`absolute w-[100px] top-14 right-0 bg-gray-200 ${modal}`} id="dropdown">
+                    <a href="/edit"><p class="px-2 py-1 text-indigo-400">edit</p></a>
                     <a href="/api/signOut"><p class="px-2 py-1 text-indigo-500">sign out</p></a>
                   </div>
                 </div>

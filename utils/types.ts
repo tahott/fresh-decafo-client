@@ -22,4 +22,5 @@ export interface Career {
 
 export interface Channel {
   name: string;
+  url: string;
 }

@@ -2,6 +2,7 @@ import { HandlerContext, Handlers, PageProps } from '$fresh/server.ts';
 import * as djwt from 'https://deno.land/x/djwt@v2.7/mod.ts';
 import NavigationBar from '../islands/Navbar.tsx';
 import Careers from '../islands/careers.tsx';
+import Icon from "../islands/Icon.tsx";
 import { Channel, JwtDecode, User } from "../utils/types.ts";
 
 interface ProfileProps {
@@ -42,11 +43,14 @@ export default function Profile({ data }: PageProps<ProfileProps>) {
                     <div class="row-span-3">
                       <div class="flex justify-center"><img class="rounded-full max-w-[128px] w-[128px]" src={data.user.avatar_url} /></div>
                     </div>
-                    <div class="col-span-3">
+                    <div class="col-span-3 flex items-center">
+                      <Icon icon="gridicons:nametag" />
                       <div>{data.user.name}</div>
                     </div>
                     <div class="col-span-3">
-                      <div>	<i class="fa-solid fa-flag"></i></div>
+                      <a>
+                        <Icon icon="mdi:github" width={24} />
+                      </a>
                     </div>
                   </div>
                 </div>

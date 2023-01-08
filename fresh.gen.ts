@@ -9,12 +9,15 @@ import * as $2 from "./routes/_middleware.ts";
 import * as $3 from "./routes/api/career.tsx";
 import * as $4 from "./routes/api/signOut.tsx";
 import * as $5 from "./routes/career.tsx";
-import * as $6 from "./routes/index.tsx";
-import * as $7 from "./routes/profile.tsx";
-import * as $8 from "./routes/signIn.tsx";
-import * as $$0 from "./islands/Navbar.tsx";
-import * as $$1 from "./islands/careers.tsx";
-import * as $$2 from "./islands/replace.tsx";
+import * as $6 from "./routes/edit.tsx";
+import * as $7 from "./routes/index.tsx";
+import * as $8 from "./routes/profile.tsx";
+import * as $9 from "./routes/signIn.tsx";
+import * as $$0 from "./islands/Icon.tsx";
+import * as $$1 from "./islands/Navbar.tsx";
+import * as $$2 from "./islands/UserBaseInfo.tsx";
+import * as $$3 from "./islands/careers.tsx";
+import * as $$4 from "./islands/replace.tsx";
 
 const manifest = {
   routes: {
@@ -24,14 +27,17 @@ const manifest = {
     "./routes/api/career.tsx": $3,
     "./routes/api/signOut.tsx": $4,
     "./routes/career.tsx": $5,
-    "./routes/index.tsx": $6,
-    "./routes/profile.tsx": $7,
-    "./routes/signIn.tsx": $8,
+    "./routes/edit.tsx": $6,
+    "./routes/index.tsx": $7,
+    "./routes/profile.tsx": $8,
+    "./routes/signIn.tsx": $9,
   },
   islands: {
-    "./islands/Navbar.tsx": $$0,
-    "./islands/careers.tsx": $$1,
-    "./islands/replace.tsx": $$2,
+    "./islands/Icon.tsx": $$0,
+    "./islands/Navbar.tsx": $$1,
+    "./islands/UserBaseInfo.tsx": $$2,
+    "./islands/careers.tsx": $$3,
+    "./islands/replace.tsx": $$4,
   },
   baseUrl: import.meta.url,
   config,
