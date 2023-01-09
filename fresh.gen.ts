@@ -15,9 +15,9 @@ import * as $8 from "./routes/profile.tsx";
 import * as $9 from "./routes/signIn.tsx";
 import * as $$0 from "./islands/Icon.tsx";
 import * as $$1 from "./islands/Navbar.tsx";
-import * as $$2 from "./islands/UserBaseInfo.tsx";
-import * as $$3 from "./islands/careers.tsx";
-import * as $$4 from "./islands/replace.tsx";
+import * as $$2 from "./islands/careers.tsx";
+import * as $$3 from "./islands/replace.tsx";
+import * as $$4 from "./islands/userBaseInfo.tsx";
 
 const manifest = {
   routes: {
@@ -35,9 +35,9 @@ const manifest = {
   islands: {
     "./islands/Icon.tsx": $$0,
     "./islands/Navbar.tsx": $$1,
-    "./islands/UserBaseInfo.tsx": $$2,
-    "./islands/careers.tsx": $$3,
-    "./islands/replace.tsx": $$4,
+    "./islands/careers.tsx": $$2,
+    "./islands/replace.tsx": $$3,
+    "./islands/userBaseInfo.tsx": $$4,
   },
   baseUrl: import.meta.url,
   config,

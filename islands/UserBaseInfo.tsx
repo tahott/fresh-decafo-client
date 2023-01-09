@@ -1,3 +1,4 @@
+import { JSXInternal } from "https://esm.sh/v95/preact@10.11.0/src/jsx.d.ts";
 import { useState } from "preact/hooks";
 import { Channel, User } from "../utils/types.ts";
 import Icon from "./Icon.tsx";
@@ -28,6 +29,22 @@ const CHANNELS = [
 
 export default function UserBaseInfo({ user, channel: c }: UserBaseProps) {
   const [name, setName] = useState(user.name);
+
+  const handleName = (e: Event) => {
+    setName((e.currentTarget as HTMLInputElement).value);
+  }
+
+  const handleSetName = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    await fetch(`http://localhost:8082/user`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name }),
+    });
+  }
+
   return (
     <div>
       <div class="grid grid-cols-4 grid-flow-col gap-4">
@@ -36,7 +53,8 @@ export default function UserBaseInfo({ user, channel: c }: UserBaseProps) {
         </div>
         <div class="col-span-3 flex items-center">
           <Icon icon="gridicons:nametag" />
-          <input class="border p-1" value={name} />
+          <input type="text" value={name} onInput={handleName} />
+          <button onClick={handleSetName}>수정</button>
         </div>
         <div class="col-span-3">
           {
