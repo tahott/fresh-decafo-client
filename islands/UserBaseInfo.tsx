@@ -36,7 +36,7 @@ export default function UserBaseInfo({ user, channel: c }: UserBaseProps) {
 
   const handleSetName = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await fetch(`http://localhost:8082/user`, {
+    const response = await fetch('/api/user', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
