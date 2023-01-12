@@ -28,20 +28,22 @@ const CHANNELS = [
 ]
 
 export default function UserBaseInfo({ user, channel: c }: UserBaseProps) {
+  const [id] = useState(user.id)
   const [name, setName] = useState(user.name);
+  const [avatarUrl, setAvatarUrl] = useState(user.avatar_url);
 
   const handleName = (e: Event) => {
     setName((e.currentTarget as HTMLInputElement).value);
   }
 
-  const handleSetName = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
+  const handleUpdateUser = async (e: JSXInternal.TargetedMouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const response = await fetch('/api/user', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ id, name, avatarUrl }),
     });
   }
 
@@ -53,8 +55,8 @@ export default function UserBaseInfo({ user, channel: c }: UserBaseProps) {
         </div>
         <div class="col-span-3 flex items-center">
           <Icon icon="gridicons:nametag" />
-          <input type="text" value={name} onInput={handleName} />
-          <button onClick={handleSetName}>수정</button>
+          <input class="border p-1" type="text" value={name} onInput={handleName} />
+          <button onClick={handleUpdateUser}>수정</button>
         </div>
         <div class="col-span-3">
           {
